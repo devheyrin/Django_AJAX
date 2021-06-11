@@ -126,7 +126,36 @@ class MyAnalysis:
         }];
         return data;
 
+    def subway(self):
+        f = open(DATA_DIRS[0] + '\\card.csv', encoding='UTF8');
+        data = csv.reader(f);
+        next(data);
+        rate = 0;
+        mx = 0;
+        # for row in data:
+        #     for i in range(4, 8):
+        #         row[i] = int(row[i].replace(',',''));
+        #         print('------',i,'----------');
+        #         print('row[i]',type(row[i]));
+        #         print('row[6]',type(row[6]));
+        #         print('row[5]',type(row[5]));
+        #         print('row[4]',type(row[4]));
+        #         if int(row[6].replace(',','')) != 0:
+        #             rate = (row[4] / int(row[6].replace(',','')));
+        #             if rate > mx:
+        #                 mx = rate
+        #                 print(row, round(rate, 2));
+        for row in data:
+            for i in range(4, 8):
+                row[i] = int(row[i].replace(',',''));
+
+            if row[6] != 0:
+                rate = (row[4] / row[6]);
+                if rate > mx:
+                    mx = rate
+                    print(row, round(rate, 2));
+
 
 if __name__ == '__main__':
-    result = MyAnalysis().traffics('서울역', '1호선');
+    result = MyAnalysis().subway();
     print(result);

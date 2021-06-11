@@ -73,7 +73,7 @@
         $(document).ready(function(){
             $('button').click(function(){
                 station = $('input[name="station"]').val();
-                line = $('input[name="line"]').val();
+                line = $('select[name="line"]').val();
                 getdata(station, line);
             });
         });
@@ -85,8 +85,36 @@
 
 </head>
 <body>
-    <input type="text" name="line">
-    <input type="text" name="station">
+    <input type="text" name="line">호선
+    <input type="text" name="station">역
+
+    <select name="line">
+        <option value="1호선">1호선</option>
+        <option value="2호선">2호선</option>
+        <option value="3호선">3호선</option>
+        <option value="4호선">4호선</option>
+        <option value="경부선">경부선</option>
+        <option value="경인선">경인선</option>
+        <option value="경원선">경원선</option>
+        <option value="안산선">안산선</option>
+        <option value="과천선">과천선</option>
+        <option value="분당선">분당선</option>
+        <option value="일산선">일산선</option>
+        <option value="중앙선">중앙선</option>
+        <option value="장항선">장항선</option>
+        <option value="경의선">경의선</option>
+        <option value="경춘선">경춘선</option>
+        <option value="수인선">수인선</option>
+        <option value="경강선">경강선</option>
+        <option value="5호선">5호선</option>
+        <option value="6호선">6호선</option>
+        <option value="7호선">7호선</option>
+        <option value="8호선">8호선</option>
+        <option value="9호선">9호선</option>
+        <option value="공항철도 1호선">공항철도 1호선</option>
+        <option value="9호선 2~3단계">9호선 2~3단계</option>
+        <option value="우이신설선">우이신설선</option>
+    </select>
 
     <button>CHART</button>
     <div id="container"></div>
