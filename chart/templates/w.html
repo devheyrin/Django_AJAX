@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+    <style>
+        #container{
+            width:500px;
+            border: 2px solid green;
+        }
+    </style>
+    <script>
+
+         function chart(data){
+           Highcharts.chart('container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Monthly Average Temperature'
+                },
+                subtitle: {
+                    text: 'Source: WorldClimate.com'
+                },
+
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature (°C)'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: data
+            });
+
+        }
+
+
+        function getdata(y,m){
+            $.ajax({
+                url:'ws',
+                data:{
+                    year:y,
+                    month:m
+                    },
+                datatype:'JSON',
+                success:function(data){
+                    chart(data);
+                },
+                error:function(){}
+            });
+        };
+        $(document).ready(function(){
+            $('button').click(function(){
+                y = $('input[name="year"]').val();
+                m = $('input[name="month"]').val();
+                getdata(y, m);
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="number" name="year">
+    <input type="number" name="month">
+    <button>CHART</button>
+    <div id="container"></div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script>
+
+        function display(data){
+            Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Browser market shares in January, 2018'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: data
+                }]
+            });
+        };
+
+
+        function getdata(station, line){
+            alert(station + line);
+            $.ajax({
+                url:'traffics',
+                data:{
+                    station:station,
+                    line:line
+                },
+                datatype:'JSON',
+                success:function(data){
+                    display(data);
+                },
+                error:function(){
+                    alert('error!!');
+                }
+            });
+        };
+
+
+        $(document).ready(function(){
+            $('button').click(function(){
+                station = $('input[name="station"]').val();
+                line = $('input[name="line"]').val();
+                getdata(station, line);
+            });
+        });
+
+
+    </script>
+
+
+
+</head>
+<body>
+    <input type="text" name="line">
+    <input type="text" name="station">
+
+    <button>CHART</button>
+    <div id="container"></div>
+</body>
+</html>
