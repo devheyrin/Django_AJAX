@@ -29,4 +29,7 @@ urlpatterns = [
     path('genders2', views.genders2, name='genders2'),
     path('traffic', TemplateView.as_view(template_name='traffic.html'), name='traffic'),
     path('traffics', views.traffics, name='traffics'),
+    path('iots', views.iots, name='iots'),
+
+
 ]

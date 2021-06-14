@@ -155,7 +155,13 @@ class MyAnalysis:
                     mx = rate
                     print(row, round(rate, 2));
 
+    def iots(self):
+        f = open(DATA_DIRS[0] + '\\mylog.csv', encoding='UTF8');
+        data = csv.reader(f);
+        for d in data:
+            print(d);
+
 
 if __name__ == '__main__':
-    result = MyAnalysis().subway();
+    result = MyAnalysis().iots();
     print(result);
